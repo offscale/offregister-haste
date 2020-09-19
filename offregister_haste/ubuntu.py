@@ -1,16 +1,20 @@
 from fabric.operations import run, sudo
-from offregister_app_push.ubuntu import
+
+# from offregister_app_push.ubuntu import
 from offregister_fab_utils.git import clone_or_update
 
 
 def install0():
-    sudo('''psql "$RDBMS_URI" -c 'create table entries
+    sudo(
+        """psql "$RDBMS_URI" -c 'create table entries
     (id serial primary key,
     key varchar(255) not null,
     value text not null,
     expiration int,
-    unique(key));' ''', user='postgres', shell_escape=False)
-
+    unique(key));' """,
+        user="postgres",
+        shell_escape=False,
+    )
 
     {
         "GIT_DIR": "/var/www/static/glaucoma-risk-calculator-rest-api",
@@ -25,9 +29,7 @@ def install0():
         "nginx": True,
         "app_name": "glaucoma-risk-calculator",
         "DESCRIPTION": "Glaucoma risk calculator frontend and backend",
-        "DNS_NAMES": [
-            "paste.complicated.io"
-        ],
+        "DNS_NAMES": ["paste.complicated.io"],
         "PROXY_ROUTE": "/api",
         "PROXY_PASS": "http://localhost:5465",
         "REST_API_PORT": 5465,
@@ -35,9 +37,14 @@ def install0():
         "WWWROOT": "/var/www/static/glaucoma-risk-calculator-web-frontend-dist/dist",
         "WWWPATH": "/",
         "nginx_secure": "certbot",
-        "https_cert_email": "samuel@offscale.io"
+        "https_cert_email": "samuel@offscale.io",
     }
 
-    clone_or_update(repo='seejohnrun', to_dir='~/repos/haste-server', use_sudo=False,
-                    branch='master', skip_reset=False)
-    #/haste-server
+    clone_or_update(
+        repo="seejohnrun",
+        to_dir="~/repos/haste-server",
+        use_sudo=False,
+        branch="master",
+        skip_reset=False,
+    )
+    # /haste-server
