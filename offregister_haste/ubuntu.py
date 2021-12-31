@@ -1,4 +1,4 @@
-from fabric.operations import run, sudo
+from fabric.operations import sudo
 
 # from offregister_app_push.ubuntu import
 from offregister_fab_utils.git import clone_or_update
