@@ -1,19 +1,17 @@
-from fabric.operations import sudo
-
 # from offregister_app_push.ubuntu import
 from offregister_fab_utils.git import clone_or_update
 
 
-def install0():
-    sudo(
+def install0(c):
+    c.sudo(
         """psql "$RDBMS_URI" -c 'create table entries
     (id serial primary key,
     key varchar(255) not null,
     value text not null,
     expiration int,
     unique(key));' """,
-        user="postgres",
-        shell_escape=False,
+        user="postgres"
+        # shell_escape=False,
     )
 
     {
