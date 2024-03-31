@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # from offregister_app_push.ubuntu import
 from offregister_fab_utils.git import clone_or_update
 
